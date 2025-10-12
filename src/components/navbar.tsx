@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Container } from "@/components/container"
+import Image from "next/image"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -22,12 +23,10 @@ export function Navbar() {
       <Container>
         <nav className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold gradient-text">
-                PropertyXpert
-              </span>
-            </div>
+          <Link href="/">
+            <figure>
+              <Image src="/images/black-bg-logo-small.png" alt="Logo" width={50} height={50} className="rounded-lg" />
+            </figure>
           </Link>
 
           {/* Desktop Navigation */}
