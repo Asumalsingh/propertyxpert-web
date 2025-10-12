@@ -1,0 +1,258 @@
+"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Container } from "@/components/container"
+import { Section } from "@/components/section"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
+import { Mail, Phone, MapPin, Send } from "lucide-react"
+
+export default function ContactUsPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    propertyType: "",
+    message: "",
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission here
+    console.log("Form submitted:", formData)
+    // You can add API call or email service integration here
+    alert("Thank you for contacting us! We will get back to you soon.")
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      propertyType: "",
+      message: "",
+    })
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Navbar />
+      <main className="flex-1">
+        {/* Hero Section */}
+        <Section className="relative overflow-hidden bg-gradient-to-b from-background via-background to-muted/20">
+          <Container>
+            <div className="flex flex-col items-center text-center space-y-6 py-12 md:py-20">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                Contact <span className="gradient-text">Us</span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-2xl">
+                Get in touch with us to find your perfect property
+              </p>
+            </div>
+          </Container>
+        </Section>
+
+        {/* Contact Section */}
+        <Section>
+          <Container>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Contact Form */}
+              <div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Send us a message</CardTitle>
+                    <CardDescription>
+                      Fill out the form below and we'll get back to you as soon as possible
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          placeholder="John Doe"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email *</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="john@example.com"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          placeholder="+91 1234567890"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="propertyType">Property Type</Label>
+                        <Input
+                          id="propertyType"
+                          name="propertyType"
+                          placeholder="e.g., Flat, Plot, Commercial"
+                          value={formData.propertyType}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">Message *</Label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          placeholder="Tell us about your property requirements..."
+                          rows={5}
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full gradient-primary hover:opacity-90 text-white"
+                      >
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Contact Information */}
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-3xl font-bold mb-6">
+                    Get in <span className="gradient-text">Touch</span>
+                  </h2>
+                  <p className="text-muted-foreground mb-8">
+                    Have questions about buying property? Our team is here to help you make
+                    the right decision. Reach out to us through any of the following channels.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-12 w-12 rounded-lg gradient-primary flex items-center justify-center">
+                            <Mail className="h-6 w-6 text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold mb-1">Email</h3>
+                          <p className="text-muted-foreground">info@propertyxpert.com</p>
+                          <p className="text-muted-foreground">support@propertyxpert.com</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-12 w-12 rounded-lg gradient-primary flex items-center justify-center">
+                            <Phone className="h-6 w-6 text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold mb-1">Phone</h3>
+                          <p className="text-muted-foreground">+91 1234567890</p>
+                          <p className="text-sm text-muted-foreground">Mon-Sat, 9am-6pm IST</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="h-12 w-12 rounded-lg gradient-primary flex items-center justify-center">
+                            <MapPin className="h-6 w-6 text-white" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold mb-1">Location</h3>
+                          <p className="text-muted-foreground">India</p>
+                          <p className="text-sm text-muted-foreground">
+                            Serving clients across the country
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className="bg-muted/30">
+                  <CardContent className="pt-6">
+                    <h3 className="font-semibold mb-2">Business Hours</h3>
+                    <div className="space-y-1 text-sm text-muted-foreground">
+                      <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                      <p>Saturday: 10:00 AM - 4:00 PM</p>
+                      <p>Sunday: Closed</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </Container>
+        </Section>
+
+        {/* CTA Section */}
+        <Section className="bg-muted/30">
+          <Container>
+            <div className="rounded-2xl gradient-primary p-8 md:p-12 text-center text-white">
+              <div className="max-w-3xl mx-auto space-y-6">
+                <h2 className="text-3xl font-bold sm:text-4xl">
+                  Ready to Find Your Dream Property?
+                </h2>
+                <p className="text-lg opacity-90">
+                  Let our experts guide you through every step of your property buying journey.
+                  Contact us today and experience real estate the expert way.
+                </p>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      </main>
+      <Footer />
+    </div>
+  )
+}
