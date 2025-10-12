@@ -176,8 +176,8 @@ export default function ContactUsPage() {
                         </div>
                         <div>
                           <h3 className="font-semibold mb-1">Email</h3>
-                          <p className="text-muted-foreground">info@propertyxpert.com</p>
-                          <p className="text-muted-foreground">support@propertyxpert.com</p>
+                          <p className="text-muted-foreground">info@propertyxpert.in</p>
+                          <p className="text-muted-foreground">support@propertyxpert.in</p>
                         </div>
                       </div>
                     </CardContent>

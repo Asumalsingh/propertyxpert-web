@@ -161,7 +161,7 @@ export default function PrivacyPolicyPage() {
                     please contact us at:
                   </p>
                   <p className="text-muted-foreground mt-2">
-                    Email: privacy@propertyxpert.com<br />
+                    Email: support@propertyxpert.in<br />
                     Phone: +91 1234567890<br />
                     Address: India
                   </p>

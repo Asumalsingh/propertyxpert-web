@@ -129,7 +129,7 @@ export default function TermsAndConditionsPage() {
                     If you have any questions about these Terms and Conditions, please contact us at:
                   </p>
                   <p className="text-muted-foreground mt-2">
-                    Email: info@propertyxpert.com<br />
+                    Email: info@propertyxpert.in<br />
                     Phone: +91 1234567890
                   </p>
                 </div>
