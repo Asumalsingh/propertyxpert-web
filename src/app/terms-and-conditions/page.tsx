@@ -130,7 +130,7 @@ export default function TermsAndConditionsPage() {
                   </p>
                   <p className="text-muted-foreground mt-2">
                     Email: info@propertyxpert.in<br />
-                    Phone: +91 1234567890
+                    Phone: +91 8602429639
                   </p>
                 </div>
               </div>

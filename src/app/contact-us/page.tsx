@@ -109,7 +109,7 @@ export default function ContactUsPage() {
                           id="phone"
                           name="phone"
                           type="tel"
-                          placeholder="+91 1234567890"
+                          placeholder="+91 8602429639"
                           value={formData.phone}
                           onChange={handleChange}
                           required
@@ -193,7 +193,7 @@ export default function ContactUsPage() {
                         </div>
                         <div>
                           <h3 className="font-semibold mb-1">Phone</h3>
-                          <p className="text-muted-foreground">+91 1234567890</p>
+                          <p className="text-muted-foreground">+91 8602429639</p>
                           <p className="text-sm text-muted-foreground">Mon-Sat, 9am-6pm IST</p>
                         </div>
                       </div>
