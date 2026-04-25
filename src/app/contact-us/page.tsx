@@ -20,20 +20,32 @@ export default function ContactUsPage() {
     propertyType: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-    // You can add API call or email service integration here
-    alert("Thank you for contacting us! We will get back to you soon.")
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      propertyType: "",
-      message: "",
-    })
+    setIsSubmitting(true)
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email || undefined,
+          phone: formData.phone,
+          propertyType: formData.propertyType || undefined,
+          source: 'website',
+          customData: formData.message ? { message: formData.message } : undefined,
+        }),
+      })
+      if (!res.ok) throw new Error('Submission failed')
+      setFormData({ name: "", email: "", phone: "", propertyType: "", message: "" })
+      alert("Thank you for contacting us! We will get back to you soon.")
+    } catch {
+      alert("Something went wrong. Please try again or call us directly.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -143,10 +155,11 @@ export default function ContactUsPage() {
                       <Button
                         type="submit"
                         size="lg"
+                        disabled={isSubmitting}
                         className="w-full gradient-primary hover:opacity-90 text-white"
                       >
                         <Send className="mr-2 h-4 w-4" />
-                        Send Message
+                        {isSubmitting ? "Sending..." : "Send Message"}
                       </Button>
                     </form>
                   </CardContent>
