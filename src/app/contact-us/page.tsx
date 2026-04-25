@@ -12,6 +12,37 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 
+type FormErrors = Partial<Record<"name" | "email" | "phone" | "message", string>>
+
+function validate(data: { name: string; email: string; phone: string; message: string }): FormErrors {
+  const errors: FormErrors = {}
+
+  if (!data.name.trim()) {
+    errors.name = "Full name is required."
+  } else if (data.name.trim().length > 100) {
+    errors.name = "Name must be 100 characters or less."
+  }
+
+  if (!data.email.trim()) {
+    errors.email = "Email is required."
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+    errors.email = "Enter a valid email address."
+  }
+
+  const digitsOnly = data.phone.replace(/[\s\-().+]/g, "")
+  if (!data.phone.trim()) {
+    errors.phone = "Phone number is required."
+  } else if (!/^\d{10,15}$/.test(digitsOnly)) {
+    errors.phone = "Enter a valid 10–15 digit phone number."
+  }
+
+  if (!data.message.trim()) {
+    errors.message = "Message is required."
+  }
+
+  return errors
+}
+
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -20,29 +51,48 @@ export default function ContactUsPage() {
     propertyType: "",
     message: "",
   })
+  const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState("")
+  const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitError("")
+
+    const validationErrors = validate(formData)
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
+    }
+    setErrors({})
     setIsSubmitting(true)
+
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email || undefined,
-          phone: formData.phone,
-          propertyType: formData.propertyType || undefined,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          propertyType: formData.propertyType.trim() || undefined,
           source: 'website',
-          customData: formData.message ? { message: formData.message } : undefined,
+          customData: formData.message.trim() ? { message: formData.message.trim() } : undefined,
         }),
       })
-      if (!res.ok) throw new Error('Submission failed')
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setSubmitError(data?.message || "Something went wrong. Please try again.")
+        return
+      }
+
       setFormData({ name: "", email: "", phone: "", propertyType: "", message: "" })
-      alert("Thank you for contacting us! We will get back to you soon.")
+      setSubmitted(true)
     } catch {
-      alert("Something went wrong. Please try again or call us directly.")
+      setSubmitError("Unable to submit. Please check your connection and try again.")
     } finally {
       setIsSubmitting(false)
     }
@@ -89,7 +139,16 @@ export default function ContactUsPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    {submitted ? (
+                      <div className="py-8 text-center space-y-2">
+                        <p className="text-lg font-semibold">Thank you for reaching out!</p>
+                        <p className="text-muted-foreground">We&apos;ll get back to you as soon as possible.</p>
+                        <Button variant="outline" className="mt-4" onClick={() => setSubmitted(false)}>
+                          Send another message
+                        </Button>
+                      </div>
+                    ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                       <div className="space-y-2">
                         <Label htmlFor="name">Full Name *</Label>
                         <Input
@@ -98,8 +157,8 @@ export default function ContactUsPage() {
                           placeholder="John Doe"
                           value={formData.name}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                       </div>
 
                       <div className="space-y-2">
@@ -111,8 +170,8 @@ export default function ContactUsPage() {
                           placeholder="john@example.com"
                           value={formData.email}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                       </div>
 
                       <div className="space-y-2">
@@ -124,8 +183,8 @@ export default function ContactUsPage() {
                           placeholder="+91 8602429639"
                           value={formData.phone}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                       </div>
 
                       <div className="space-y-2">
@@ -148,9 +207,13 @@ export default function ContactUsPage() {
                           rows={5}
                           value={formData.message}
                           onChange={handleChange}
-                          required
                         />
+                        {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                       </div>
+
+                      {submitError && (
+                        <p className="text-sm text-destructive">{submitError}</p>
+                      )}
 
                       <Button
                         type="submit"
@@ -162,6 +225,7 @@ export default function ContactUsPage() {
                         {isSubmitting ? "Sending..." : "Send Message"}
                       </Button>
                     </form>
+                    )}
                   </CardContent>
                 </Card>
               </div>
