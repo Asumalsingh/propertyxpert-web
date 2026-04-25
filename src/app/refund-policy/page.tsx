@@ -218,8 +218,8 @@ export default function RefundPolicyPage() {
                   <p className="text-muted-foreground">
                     Email: support@propertyxpert.in<br />
                     Phone: +91 8602429639<br />
-                    Address: India<br />
-                    Support Hours: Monday - Friday, 9:00 AM - 6:00 PM IST
+                    Office Hours: 10:00 AM – 7:00 PM<br />
+                    Registered Office: Unit No.202, 2nd Floor, Om Gurudev Plaza, Bhamori, Vijay Nagar, Indore, Madhya Pradesh – 452010
                   </p>
                 </div>
 

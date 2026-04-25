@@ -163,7 +163,8 @@ export default function PrivacyPolicyPage() {
                   <p className="text-muted-foreground mt-2">
                     Email: support@propertyxpert.in<br />
                     Phone: +91 8602429639<br />
-                    Address: India
+                    Office Hours: 10:00 AM – 7:00 PM<br />
+                    Registered Office: Unit No.202, 2nd Floor, Om Gurudev Plaza, Bhamori, Vijay Nagar, Indore, Madhya Pradesh – 452010
                   </p>
                 </div>
               </div>

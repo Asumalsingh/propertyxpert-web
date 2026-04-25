@@ -90,9 +90,9 @@ export function Footer() {
                   <Phone className="h-4 w-4" />
                   <span>+91 8602429639</span>
                 </li>
-                <li className="flex items-center space-x-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>India</span>
+                <li className="flex items-start space-x-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <span>Unit No.202, 2nd Floor, Om Gurudev Plaza, Bhamori, Vijay Nagar, Indore, Madhya Pradesh – 452010</span>
                 </li>
               </ul>
             </div>

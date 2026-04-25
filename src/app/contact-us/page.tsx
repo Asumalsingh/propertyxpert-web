@@ -194,7 +194,7 @@ export default function ContactUsPage() {
                         <div>
                           <h3 className="font-semibold mb-1">Phone</h3>
                           <p className="text-muted-foreground">+91 8602429639</p>
-                          <p className="text-sm text-muted-foreground">Mon-Sat, 9am-6pm IST</p>
+                          <p className="text-sm text-muted-foreground">Daily, 10:00 AM – 7:00 PM</p>
                         </div>
                       </div>
                     </CardContent>
@@ -209,11 +209,10 @@ export default function ContactUsPage() {
                           </div>
                         </div>
                         <div>
-                          <h3 className="font-semibold mb-1">Location</h3>
-                          <p className="text-muted-foreground">India</p>
-                          <p className="text-sm text-muted-foreground">
-                            Serving clients across the country
-                          </p>
+                          <h3 className="font-semibold mb-1">Registered Office</h3>
+                          <p className="text-muted-foreground">Unit No.202, 2nd Floor, Om Gurudev Plaza,</p>
+                          <p className="text-muted-foreground">Bhamori, Vijay Nagar, Indore,</p>
+                          <p className="text-muted-foreground">Madhya Pradesh – 452010</p>
                         </div>
                       </div>
                     </CardContent>
@@ -222,11 +221,9 @@ export default function ContactUsPage() {
 
                 <Card className="bg-muted/30">
                   <CardContent className="pt-6">
-                    <h3 className="font-semibold mb-2">Business Hours</h3>
+                    <h3 className="font-semibold mb-2">Office Hours</h3>
                     <div className="space-y-1 text-sm text-muted-foreground">
-                      <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                      <p>Saturday: 10:00 AM - 4:00 PM</p>
-                      <p>Sunday: Closed</p>
+                      <p>Monday – Sunday: 10:00 AM – 7:00 PM</p>
                     </div>
                   </CardContent>
                 </Card>
